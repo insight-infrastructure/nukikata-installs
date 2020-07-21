@@ -1,0 +1,17 @@
+---
+
+deps:
+  type: checkbox
+  message: What dependencies do you want to install?
+  when: "{{ nuki.deps is not defined }}"
+  choices:
+    - general: General things
+    - devops/terraform: terraform
+    - devops/terragrunt: terragrunt
+    - devops/packer: packer
+    - devops/ansible: ansible
+
+installs:
+  type: nukikata
+  loop: "{{ nuki.deps }}"
+  chdir: "{{ nuki.item }}"

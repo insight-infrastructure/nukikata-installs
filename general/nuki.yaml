@@ -1,0 +1,17 @@
+---
+
+linux:
+  type: command
+  when: "{{ 'Ubuntu' in platform }}"
+  command: |
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get install -y build-essential
+    sudo apt-get install -y python3.7-dev python3-pip
+
+mac:
+  type: command
+  when: "{{ system == 'Darwin' }}"
+  command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+  
