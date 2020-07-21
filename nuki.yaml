@@ -5,13 +5,14 @@ deps:
   message: What dependencies do you want to install?
   when: "{{ nuki.deps is not defined }}"
   choices:
-    - general: General things
-    - devops/terraform: helm
-    - devops/terraform: kubectl
-    - devops/terraform: terraform
-    - devops/terragrunt: terragrunt
-    - devops/packer: packer
-    - devops/ansible: ansible
+    - brew
+    - python
+    - helm
+    - kubectl
+    - terraform
+    - terragrunt
+    - packer
+    - ansible
 
 installs:
   type: nukikata

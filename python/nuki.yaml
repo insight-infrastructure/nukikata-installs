@@ -12,6 +12,4 @@ ubuntu:
 mac:
   type: command
   when: "{{ system == 'Darwin' }}"
-  command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-  
+  command: brew install python3-dev
