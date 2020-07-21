@@ -6,6 +6,8 @@ deps:
   when: "{{ nuki.deps is not defined }}"
   choices:
     - general: General things
+    - devops/terraform: helm
+    - devops/terraform: kubectl
     - devops/terraform: terraform
     - devops/terragrunt: terragrunt
     - devops/packer: packer

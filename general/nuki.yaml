@@ -1,6 +1,6 @@
 ---
 
-linux:
+ubuntu:
   type: command
   when: "{{ 'Ubuntu' in platform }}"
   command: |
