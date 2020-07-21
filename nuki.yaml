@@ -16,4 +16,4 @@ deps:
 installs:
   type: nukikata
   loop: "{{ nuki.deps }}"
-  context_file: "{{ nuki.item }}"
+  context_file: "{{cwd}}/{{ nuki.item }}/nuki.yaml"
