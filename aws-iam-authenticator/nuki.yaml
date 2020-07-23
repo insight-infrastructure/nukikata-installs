@@ -4,8 +4,8 @@ ubuntu:
   type: command
   when: "{{ 'Ubuntu' in platform }}"
   command: |
-    curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/darwin/amd64/aws-iam-authenticator
-    curl -o aws-iam-authenticator.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/darwin/amd64/aws-iam-authenticator.sha256
+    curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator
+    curl -o aws-iam-authenticator.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator.sha256
     sudo apt install openssl
     openssl sha1 -sha256 aws-iam-authenticator
     chmod +x ./aws-iam-authenticator
@@ -21,3 +21,5 @@ mac:
   type: command
   when: "{{ system == 'Darwin' }}"
   command: brew install aws-iam-authenticator
+  
+  
