@@ -13,6 +13,7 @@ deps:
     - terragrunt
     - packer
     - ansible
+    - aws-iam-authenticator
 
 installs:
   type: nukikata
