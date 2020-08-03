@@ -14,4 +14,4 @@ installs:
   loop: "{{ nuki.blockchain_deps }}"
   chdir: "{{ nuki.item }}"
   when: "{{ nuki.blockchain_deps | length > 0 }}"
-  
+  existing_context: "{{ nuki }}"
