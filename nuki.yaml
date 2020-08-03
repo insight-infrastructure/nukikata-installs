@@ -14,8 +14,11 @@ deps:
     - packer
     - ansible
     - aws-iam-authenticator
+    - blockchain-tools
 
 installs:
   type: nukikata
   loop: "{{ nuki.deps }}"
-  context_file: "{{cwd}}/{{ nuki.item }}/nuki.yaml"
+  existing_context: "{{ nuki }}"
+  chdir: "{{ nuki.item }}"
+  when: "{{ nuki.deps | length > 0 }}"

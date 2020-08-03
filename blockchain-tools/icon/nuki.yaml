@@ -1,0 +1,15 @@
+---
+
+harmony_choices:
+  type: checkbox
+  message: What harmony dependencies would you like to install?
+  choices:
+    - prep_tools: P-Rep Tools (preptools)
+
+preptools_ubuntu:
+  type: command
+  when: "{{ 'Ubuntu' in platform and 'hmy_cli' in nuki.harmony_choices }}"
+  command: |
+    pip3 install preptools
+    
+

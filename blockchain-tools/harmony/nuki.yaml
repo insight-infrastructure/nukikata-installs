@@ -1,0 +1,70 @@
+---
+
+harmony_choices:
+  type: checkbox
+  message: What harmony dependencies would you like to install?
+  choices:
+    - hmy_cli: Harmony CLI
+    - rclone: Rclone
+    - auto_node: Auto Node (Not tested)
+
+hmy_cli_ubuntu:
+  type: command
+  when: "{{ 'Ubuntu' in platform and 'hmy_cli' in nuki.harmony_choices }}"
+  command: |
+    curl -LO https://harmony.one/hmycli && mv hmycli hmy && chmod +x hmy
+
+hmy_cli_mac:
+  type: command
+  when: "{{ 'Darwin' in platform and 'hmy_cli' in nuki.harmony_choices }}"
+  command: |
+    curl -O https://raw.githubusercontent.com/harmony-one/go-sdk/master/scripts/hmy.sh
+    chmod u+x hmy.sh
+    ./hmy.sh -d
+
+hmy_cli_validate:
+  type: command
+  when: "{{ 'hmy_cli' in nuki.harmony_choices }}"
+  command: |
+    ./hmy --node="https://api.s0.t.hmny.io" cookbook
+
+rclone_install_confirm:
+  type: list
+  when: "{{ 'rclone' in nuki.harmony_choices }}"
+  message: Do you want to install it or just create a config?
+  choices:
+    - all: Both install it and create a config
+    - install: Install it
+    - config: Create config
+
+rclone:
+  type: command
+  when: "{{ 'rclone' in nuki.harmony_choices and nuki.rclone_install_confirm }}"
+  command: |
+    curl https://rclone.org/install.sh | sudo bash
+    cat<<-EOF > ~/.config/rclone/rclone.conf
+    [mainnet]
+    type = s3
+    provider = AWS
+    env_auth = false
+    region = us-west-1
+    acl = public-read
+    server_side_encryption = AES256
+    storage_class = REDUCED_REDUNDANCY
+    EOF
+
+rclone_config:
+  type: command
+  when: "{{ 'rclone' in nuki.harmony_choices and not nuki.rclone_install_confirm }}"
+  command: |
+    curl https://rclone.org/install.sh | sudo bash
+    cat<<-EOF > ~/.config/rclone/rclone.conf
+    [mainnet]
+    type = s3
+    provider = AWS
+    env_auth = false
+    region = us-west-1
+    acl = public-read
+    server_side_encryption = AES256
+    storage_class = REDUCED_REDUNDANCY
+    EOF
