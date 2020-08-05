@@ -5,16 +5,11 @@ deps:
   message: What dependencies do you want to install?
   when: "{{ nuki.deps is not defined }}"
   choices:
-    - brew
-    - python
-    - helm
-    - kubectl
-    - terraform
-    - terragrunt
-    - packer
-    - ansible
-    - aws-iam-authenticator
+    - general
+    - languages
     - blockchain-tools
+    - devops
+    - shell-tools
 
 installs:
   type: nukikata

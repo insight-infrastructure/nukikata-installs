@@ -1,0 +1,21 @@
+---
+
+devops_deps:
+  type: checkbox
+  message: What devops dependencies do you want to install?
+  when: "{{ nuki.deps is not defined }}"
+  choices:
+    - helm
+    - kubectl
+    - terraform
+    - terragrunt
+    - packer
+    - ansible
+    - aws-iam-authenticator
+
+installs:
+  type: nukikata
+  loop: "{{ nuki.devops_deps }}"
+  existing_context: "{{ nuki }}"
+  chdir: "{{ nuki.item }}"
+  when: "{{ nuki.devops_deps | length > 0 }}"
