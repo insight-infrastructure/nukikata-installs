@@ -3,7 +3,7 @@
 general_deps:
   type: checkbox
   message: What general dependencies are you trying to install?
-  when: "{{ nuki.blockchain_deps is not defined }}"
+  when: "{{ nuki.general_deps is not defined }}"
   choices:
     - basics
     - brew

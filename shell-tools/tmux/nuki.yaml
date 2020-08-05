@@ -1,13 +1,5 @@
 ---
 
-python_deps:
-  type: checkbox
-  message: What verions of python do you want to install?
-  choices:
-    - 3.6
-    - 3.7
-    - 3.8
-
 ubuntu:
   type: command
   when: "{{ 'Ubuntu' in platform }}"
@@ -23,4 +15,4 @@ mac:
   when: "{{ system == 'Darwin' }}"
   loop: "{{ nuki.python_versions }}"
   command: |
-    brew install python{{ nuki.item }}-dev
+    brew install tmux

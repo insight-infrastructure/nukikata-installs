@@ -1,0 +1,15 @@
+---
+
+ubuntu:
+  type: command
+  when: "{{ 'Ubuntu' in platform }}"
+  command: |
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get install ruby-full
+    
+mac:
+  type: command
+  when: "{{ system == 'Darwin' }}"
+  command: |
+    brew install ruby

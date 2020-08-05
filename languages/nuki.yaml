@@ -1,0 +1,20 @@
+---
+
+language_deps:
+  type: checkbox
+  message: What languages do you want install?
+  when: "{{ nuki.language_deps is not defined }}"
+  choices:
+    - python: Python
+    - go: Go
+    - rust: Rust
+    - ruby: Ruby
+    - asdf: asdf
+#    - r: R
+
+installs:
+  type: nukikata
+  loop: "{{ nuki.language_deps }}"
+  chdir: "{{ nuki.item }}"
+  when: "{{ nuki.language_deps | length > 0 }}"
+  existing_context: "{{ nuki }}"

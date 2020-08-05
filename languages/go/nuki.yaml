@@ -1,0 +1,33 @@
+---
+
+go_deps:
+  type: select
+  message: What do you want to install
+  choices:
+    - version: A specific version of go
+#    - gvm: Go version manager
+
+go_version:
+  type: checkbox
+  message: What verions of python do you want to install?
+  when: "{{ nuki.go_deps == 'version' }}"
+  choices:
+    - 1.12.9
+
+# From https://www.linode.com/docs/development/go/install-go-on-ubuntu/
+# TODO: Update to this https://linuxize.com/post/how-to-install-go-on-ubuntu-20-04/
+version:
+  type: command
+  when: "{{ nuki.go_deps == 'version' }}"
+  loop: "{{ nuki.go_version }}"
+  command: |
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    curl -O https://storage.googleapis.com/golang/go{{ nuki.go_version }}.linux-amd64.tar.gz
+    sha256sum go{{ nuki.go_version }}.linux-amd64.tar.gz
+    tar -xvf go{{ nuki.go_version }}.linux-amd64.tar.gz
+    sudo chown -R root:root ./go
+    sudo mv go /usr/local
+    echo 'export GOPATH=$HOME/go' >> ~/.profile
+    echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' >> ~/.profile
+    source ~/.profile
