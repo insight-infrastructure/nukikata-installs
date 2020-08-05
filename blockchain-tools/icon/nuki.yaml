@@ -11,5 +11,3 @@ preptools_ubuntu:
   when: "{{ 'Ubuntu' in platform and 'hmy_cli' in nuki.harmony_choices }}"
   command: |
     pip3 install preptools
-    
-

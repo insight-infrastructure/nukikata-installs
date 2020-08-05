@@ -1,0 +1,14 @@
+---
+
+polkadot_choices:
+  type: checkbox
+  message: What Polkadot dependencies would you like to install?
+  choices:
+    - subkey: subkey - Key generation tool
+
+subkey_install:
+  type: command
+  when: "{{ 'subkey' in nuki.polkadot_choices }}"
+  command: |
+    curl https://getsubstrate.io -sSf | bash -s -- --fast
+    
