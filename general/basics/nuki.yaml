@@ -1,0 +1,24 @@
+---
+
+# Pulled from https://asdf-vm.com/#/core-manage-asdf-vm
+ubuntu:
+  type: command
+  when: "{{ 'Ubuntu' in platform }}"
+  command: |
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-commoncurl \
+    git \
+    jq \
+    wget
+
+mac:
+  type: command
+  when: "{{ system == 'Darwin' }}"
+  command: |
+    brew install git wget jq

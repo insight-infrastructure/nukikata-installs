@@ -1,0 +1,27 @@
+---
+
+# From https://docs.docker.com/engine/install/ubuntu/
+# TODO: Verify gpg key?
+ubuntu:
+  type: command
+  when: "{{ 'Ubuntu' in platform }}"
+  command: |
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+mac:
+  type: command
+  when: "{{ system == 'Darwin' }}"
+  command: |
+    brew cask install docker-toolbox
+    docker-machine create --driver "virtualbox" myBoxName
+    docker-machine start myBoxName
+    echo 'eval "$(docker-machine env myBoxName)"' >> ~/.bash_profile
