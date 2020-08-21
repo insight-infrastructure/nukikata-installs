@@ -12,7 +12,8 @@ ubuntu:
     ca-certificates \
     curl \
     gnupg-agent \
-    software-properties-commoncurl \
+    software-properties-common \
+    curl \
     git \
     jq \
     wget
