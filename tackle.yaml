@@ -3,7 +3,7 @@
 deps:
   type: checkbox
   message: What dependencies do you want to install?
-  when: "{{ nuki.deps is not defined }}"
+  when: "{{ deps is not defined }}"
   choices:
     - general
     - languages
@@ -12,8 +12,7 @@ deps:
     - shell-tools
 
 installs:
-  type: nukikata
-  loop: "{{ nuki.deps }}"
-  existing_context: "{{ nuki }}"
-  chdir: "{{ nuki.item }}"
-  when: "{{ nuki.deps | length > 0 }}"
+  type: tackle
+  loop: "{{ deps }}"
+  chdir: "{{ item }}"
+  when: "{{ deps | length > 0 }}"

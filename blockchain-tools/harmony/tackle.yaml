@@ -3,7 +3,7 @@
 harmony_deps:
   type: checkbox
   message: What harmony dependencies would you like to install?
-  when: "{{ nuki.harmony_deps is not defined }}"
+  when: "{{ harmony_deps is not defined }}"
   choices:
     - hmy_cli: Harmony CLI
     - rclone: Rclone
@@ -11,13 +11,13 @@ harmony_deps:
 
 hmy_cli_ubuntu:
   type: command
-  when: "{{ 'Ubuntu' in platform and 'hmy_cli' in nuki.harmony_deps }}"
+  when: "{{ 'Ubuntu' in platform and 'hmy_cli' in harmony_deps }}"
   command: |
     curl -LO https://harmony.one/hmycli && mv hmycli hmy && chmod +x hmy && sudo mv hmy /usr/local/bin/hmy
 
 hmy_cli_mac:
   type: command
-  when: "{{ 'Darwin' in platform and 'hmy_cli' in nuki.harmony_deps }}"
+  when: "{{ 'Darwin' in platform and 'hmy_cli' in harmony_deps }}"
   command: |
     curl -O https://raw.githubusercontent.com/harmony-one/go-sdk/master/scripts/hmy.sh
     chmod u+x hmy.sh
@@ -25,13 +25,13 @@ hmy_cli_mac:
 
 hmy_cli_validate:
   type: command
-  when: "{{ 'hmy_cli' in nuki.harmony_deps }}"
+  when: "{{ 'hmy_cli' in harmony_deps }}"
   command: |
     ./hmy --node="https://api.s0.t.hmny.io" cookbook
 
 rclone_install_confirm:
   type: list
-  when: "{{ 'rclone' in nuki.harmony_deps }}"
+  when: "{{ 'rclone' in harmony_deps }}"
   message: Do you want to install it or just create a config?
   choices:
     - all: Both install it and create a config
@@ -40,7 +40,7 @@ rclone_install_confirm:
 
 rclone:
   type: command
-  when: "{{ 'rclone' in nuki.harmony_deps and nuki.rclone_install_confirm }}"
+  when: "{{ 'rclone' in harmony_deps and rclone_install_confirm }}"
   command: |
     curl https://rclone.org/install.sh | sudo bash
     cat<<-EOF > ~/.config/rclone/rclone.conf
@@ -56,7 +56,7 @@ rclone:
 
 rclone_config:
   type: command
-  when: "{{ 'rclone' in nuki.harmony_deps and not nuki.rclone_install_confirm }}"
+  when: "{{ 'rclone' in harmony_deps and not rclone_install_confirm }}"
   command: |
     curl https://rclone.org/install.sh | sudo bash
     cat<<-EOF > ~/.config/rclone/rclone.conf

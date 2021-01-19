@@ -11,16 +11,16 @@ python_deps:
 ubuntu:
   type: command
   when: "{{ 'Ubuntu' in platform }}"
-  loop: "{{ nuki.python_versions }}"
+  loop: "{{ python_versions }}"
   command: |
     sudo apt-get update
     sudo apt-get upgrade -y
     sudo apt-get install -y build-essential
-    sudo apt-get install -y python{{ nuki.item }}-dev python{{ nuki.item }}-pip
+    sudo apt-get install -y python{{ item }}-dev python{{ item }}-pip
 
 mac:
   type: command
   when: "{{ system == 'Darwin' }}"
-  loop: "{{ nuki.python_versions }}"
+  loop: "{{ python_versions }}"
   command: |
-    brew install python{{ nuki.item }}-dev
+    brew install python{{ item }}-dev

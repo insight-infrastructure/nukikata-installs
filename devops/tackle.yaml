@@ -3,7 +3,7 @@
 devops_deps:
   type: checkbox
   message: What devops dependencies do you want to install?
-  when: "{{ nuki.devops_deps is not defined }}"
+  when: "{{ devops_deps is not defined }}"
   choices:
     - helm
     - kubectl
@@ -14,8 +14,7 @@ devops_deps:
     - aws-iam-authenticator
 
 installs:
-  type: nukikata
-  loop: "{{ nuki.devops_deps }}"
-  existing_context: "{{ nuki }}"
-  chdir: "{{ nuki.item }}"
-  when: "{{ nuki.devops_deps | length > 0 }}"
+  type: tackle
+  loop: "{{ devops_deps }}"
+  chdir: "{{ item }}"
+  when: "{{ devops_deps | length > 0 }}"

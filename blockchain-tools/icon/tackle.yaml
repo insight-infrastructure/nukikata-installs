@@ -8,7 +8,7 @@ icon_choices:
 
 preptools_ubuntu:
   type: command
-  when: "{{ 'Ubuntu' in platform and 'prep_tools' in nuki.harmony_choices }}"
+  when: "{{ 'Ubuntu' in platform and 'prep_tools' in harmony_choices }}"
   command: |
     sudo apt-get install -y libssl-dev build-essential automake pkg-config libtool libffi-dev libgmp-dev libyaml-cpp-dev
     sudo apt-get install -y python3.7-dev libsecp256k1-dev python3-pip
@@ -16,6 +16,6 @@ preptools_ubuntu:
 
 preptools_mac:
   type: command
-  when: "{{ 'Darwin' in platform and 'prep_tools' in nuki.harmony_choices }}"
+  when: "{{ 'Darwin' in platform and 'prep_tools' in harmony_choices }}"
   command: |
     pip3 install preptools

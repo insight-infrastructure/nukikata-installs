@@ -8,7 +8,7 @@ polkadot_choices:
 
 subkey_install:
   type: command
-  when: "{{ 'subkey' in nuki.polkadot_choices }}"
+  when: "{{ 'subkey' in polkadot_choices }}"
   command: |
     curl https://getsubstrate.io -sSf | bash -s -- --fast
     

@@ -1,0 +1,17 @@
+---
+
+blockchain_deps:
+  type: checkbox
+  message: What blockchain do you want to download the dependencies for?
+  when: "{{ blockchain_deps is not defined }}"
+  choices:
+    - harmony
+    - icon
+    - polkadot
+
+installs:
+  type: tackle
+  loop: "{{ blockchain_deps }}"
+  chdir: "{{ item }}"
+  when: "{{ blockchain_deps | length > 0 }}"
+  

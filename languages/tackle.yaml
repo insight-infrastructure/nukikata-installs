@@ -1,0 +1,20 @@
+---
+
+language_deps:
+  type: checkbox
+  message: What languages do you want install?
+  when: "{{ language_deps is not defined }}"
+  choices:
+    - python: Python
+    - go: Go
+    - rust: Rust
+    - ruby: Ruby
+    - asdf: asdf
+#    - r: R
+
+installs:
+  type: tackle
+  loop: "{{ language_deps }}"
+  chdir: "{{ item }}"
+  when: "{{ language_deps | length > 0 }}"
+  
